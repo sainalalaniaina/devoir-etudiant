@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import * as etudiantController from '../controllers/etudiant.controller';
+import * as etudiantController from '../controllers/etudiantController.ts';
 
 const router = Router();
 
-router.get('/', etudiantController.getEtudiants);
+router.get('/', etudiantController.getEtudiants);   
 router.get('/:id', etudiantController.getEtudiant);
 router.post('/', etudiantController.createEtudiant);
 router.put('/:id', etudiantController.replaceEtudiant);
