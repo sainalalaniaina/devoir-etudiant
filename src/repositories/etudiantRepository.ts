@@ -1,4 +1,5 @@
 import pool from '../model/etudiantModel';
+import type { EtudiantInput, EtudiantPatch } from '../model/etudiantTypes';
 
 export async function findAll() {
   const resultat = await pool.query('SELECT * FROM etudiants ORDER BY id');
@@ -10,7 +11,7 @@ export async function findById(id: number) {
   return resultat.rows[0];
 }
 
-export async function create(etudiant: any) {
+export async function create(etudiant: EtudiantInput) {
   const { nom, prenom, email } = etudiant;
   const resultat = await pool.query(
     'INSERT INTO etudiants (nom, prenom, email) VALUES ($1, $2, $3) RETURNING *',
@@ -19,7 +20,7 @@ export async function create(etudiant: any) {
   return resultat.rows[0];
 }
 
-export async function updateFull(id: number, etudiant: any) {
+export async function updateFull(id: number, etudiant: EtudiantInput) {
   const { nom, prenom, email } = etudiant;
   const resultat = await pool.query(
     'UPDATE etudiants SET nom = $1, prenom = $2, email = $3 WHERE id = $4 RETURNING *',
@@ -28,7 +29,7 @@ export async function updateFull(id: number, etudiant: any) {
   return resultat.rows[0];
 }
 
-export async function updatePartial(id: number, champs: any) {
+export async function updatePartial(id: number, champs: EtudiantPatch) {
   const etudiantActuel = await findById(id);
   if (!etudiantActuel) return null;
 

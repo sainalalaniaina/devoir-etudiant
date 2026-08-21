@@ -1,7 +1,7 @@
-import { Request, Response } from 'express';
+import type { Request, Response } from 'express';
 import * as etudiantService from '../services/etudiantService';
 
-export async function getEtudiants(req: Request, res: Response) {
+export async function getEtudiants(_req: Request, res: Response) {
   try {
     const etudiants = await etudiantService.getAllEtudiants();
     res.status(200).json(etudiants);
